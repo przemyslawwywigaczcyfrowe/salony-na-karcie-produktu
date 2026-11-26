@@ -31,7 +31,7 @@
     <button data-w="dzis">Dziś</button>
     <button data-w="w1">Wersja 1: dwa osobne wiersze</button>
     <button data-w="w2">Wersja 2: jeden wiersz z dwiema grupami</button>
-    <button data-w="w3">Wersja 3: pulsujące kropki</button>
+    <button data-w="w3">Wersja 3: wyróżnienie jak "Wysyłamy w 24h"</button>
   </div>
   <div class="grupa"><b>Gdzie jest towar?</b>
     <button data-p="czesc">W 5 z 7 salonów</button>
@@ -53,7 +53,7 @@
     dzis: 'Dziś: jeden wiersz i 7 salonów w stałej kolejności, przemieszane zielone i szare kropki. Na komputerze lista zajmuje 2 linie, na telefonie 3.',
     w1: 'Wersja 1, według zadania w Asanie: dwie kategorie jako dwa osobne wiersze, każdy z ikoną salonu. "Natychmiastowy odbiór" i salony z towarem, pod spodem "Darmowy odbiór w salonach" i pozostałe salony. Gdy towar jest wszędzie albo nigdzie, zostaje jeden wiersz.',
     w2: 'Wersja 2, według zadania w Asanie: te same dwie kategorie w jednym wierszu z jedną ikoną salonu. Nazwy kategorii stoją jak podpisy nad salonami, więc wiersz jest niższy niż w wersji 1.',
-    w3: 'Wersja 3: układ wersji 1. Wiersz "Natychmiastowy odbiór" ma delikatne zielone tło na szerokość pola z ceną, a od zielonych kropek salonów z towarem co 2 s rozchodzi się cienki zielony okrąg, a sama kropka lekko rośnie. Wszystkie kropki pulsują razem, jak sygnał "na żywo". Ruch ma przyciągnąć wzrok do salonów, w których towar czeka już teraz. Osoby z włączonym ograniczeniem ruchu w systemie widzą zwykłe kropki.'
+    w3: 'Wersja 3: "Natychmiastowy odbiór" wygląda jak wiersz "Wysyłamy w 24h": duża zielona kropka i pogrubiony napis, pod spodem salony z towarem. Od dużej kropki co 2 s rozchodzi się zielony okrąg. Pulsuje tylko ta jedna kropka. Kto ma w systemie włączone ograniczenie ruchu, widzi kropkę bez animacji.'
   };
   var stan = { w: 'w1', p: 'czesc', k: '' };
   function skala() {
