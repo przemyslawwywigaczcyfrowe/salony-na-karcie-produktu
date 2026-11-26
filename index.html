@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Salony na karcie produktu</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap">
+<style>
+  :root { --tlo:#eeeeee; --tekst:#1a1a1a; --akcent:#dd0031; --ramka:#d0d0d0; }
+  body { margin:0; font-family:Lato, sans-serif; background:var(--tlo); color:var(--tekst); }
+  header { padding:12px 16px; background:#fff; border-bottom:1px solid var(--ramka); position:sticky; top:0; z-index:2; }
+  h1 { font-size:18px; margin:0 0 10px; }
+  .grupa { display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-bottom:6px; }
+  .grupa b { font-size:13px; width:150px; }
+  button { font:inherit; font-size:13px; padding:6px 12px; border:1px solid var(--ramka); background:#fff; border-radius:4px; cursor:pointer; }
+  button[aria-pressed=true] { border-color:var(--akcent); color:var(--akcent); font-weight:700; }
+  .opis { font-size:14px; margin:6px 0 0; max-width:1000px; line-height:1.45; }
+  main { display:flex; gap:24px; padding:16px; align-items:flex-start; }
+  figure { margin:0; }
+  figcaption { font-size:12px; color:#555; margin-bottom:6px; }
+  .okno-komputer { width:calc(1440px * var(--s)); height:calc(900px * var(--s)); overflow:hidden; border:1px solid var(--ramka); background:#fff; }
+  .komputer { width:1440px; height:900px; border:0; transform:scale(var(--s)); transform-origin:0 0; }
+  .telefon { width:390px; height:780px; border:1px solid var(--ramka); background:#fff; border-radius:14px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Salony na karcie produktu: poglądówka na całej karcie</h1>
+  <div class="grupa"><b>Wersja</b>
+    <button data-w="dzis">Dziś</button>
+    <button data-w="kolejnosc">A. Ta sama lista, salony z towarem na początku</button>
+    <button data-w="zwiezle">B. Dwie krótkie linie</button>
+    <button data-w="jedna">C. Jedna linia, szczegóły w panelu</button>
+  </div>
+  <div class="grupa"><b>Gdzie jest towar?</b>
+    <button data-p="czesc">W 5 z 7 salonów</button>
+    <button data-p="wszystkie">We wszystkich salonach</button>
+    <button data-p="zaden">Tylko w magazynie</button>
+  </div>
+  <div class="grupa"><b>Panel salonów</b>
+    <button data-k="">Zamknięty</button>
+    <button data-k="panel">Otwarty</button>
+  </div>
+  <p class="opis" id="opis"></p>
+</header>
+<main>
+  <figure><figcaption>Komputer, 1440 px (pomniejszone do okna)</figcaption><div class="okno-komputer"><iframe class="komputer" id="f1" title="Komputer"></iframe></div></figure>
+  <figure><figcaption>Telefon, 390 px</figcaption><iframe class="telefon" id="f2" title="Telefon"></iframe></figure>
+</main>
+<script>
+  var OPISY = {
+    dzis: 'Dziś: jeden wiersz i 7 salonów w stałej kolejności, przemieszane zielone i szare kropki. Na komputerze lista zajmuje 2 linie, na telefonie 3.',
+    kolejnosc: 'A: nic nie dochodzi. Salony z towarem stoją na początku, alfabetycznie, a salony bez towaru mają szary napis. Klient od razu widzi, gdzie towar jest.',
+    zwiezle: 'B: ten sam wiersz, w środku dwie linie zwykłym tekstem: "Od ręki: ..." i "Pozostałe 2 salony za 1-2 dni". Termin "1-2 dni" sklep już dziś podaje w panelu salonów.',
+    jedna: 'C: wiersz skraca się do jednej linii "Darmowy odbiór w 7 salonach · od ręki w 5 z 7". Listę z podziałem na dwie grupy pokazuje panel po kliknięciu. Tak robią Calumet, Cameranu, WEX i Foto-Plus.'
+  };
+  var stan = { w: 'kolejnosc', p: 'czesc', k: '' };
+  function skala() {
+    var wolne = window.innerWidth - 390 - 24 - 32 - 4;
+    document.documentElement.style.setProperty('--s', Math.max(0.35, Math.min(1, wolne / 1440)).toFixed(3));
+  }
+  function pokaz() {
+    var h = stan.w + '-' + stan.p + (stan.k ? '-panel' : '');
+    ['f1', 'f2'].forEach(function (id) {
+      var f = document.getElementById(id);
+      if (f.dataset.zaladowana) f.contentWindow.location.hash = h; else { f.src = 'karta.html?v=' + Date.now() + '#' + h; f.dataset.zaladowana = 1; }
+    });
+    document.querySelectorAll('[data-w]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.w === stan.w); });
+    document.querySelectorAll('[data-p]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.p === stan.p); });
+    document.querySelectorAll('[data-k]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.k === stan.k); });
+    document.getElementById('opis').textContent = OPISY[stan.w];
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.w) stan.w = b.dataset.w;
+    if (b.dataset.p) stan.p = b.dataset.p;
+    if ('k' in b.dataset) stan.k = b.dataset.k;
+    pokaz();
+  });
+  window.addEventListener('resize', skala);
+  skala(); pokaz();
+</script>
+</body>
+</html>
