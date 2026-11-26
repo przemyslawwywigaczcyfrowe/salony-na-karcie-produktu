@@ -29,9 +29,8 @@
   <h1>Salony na karcie produktu: poglądówka na całej karcie</h1>
   <div class="grupa"><b>Wersja</b>
     <button data-w="dzis">Dziś</button>
-    <button data-w="kolejnosc">A. Ta sama lista, salony z towarem na początku</button>
-    <button data-w="zwiezle">B. Dwie krótkie linie</button>
-    <button data-w="jedna">C. Jedna linia, szczegóły w panelu</button>
+    <button data-w="w1">Wersja 1: dwa osobne wiersze</button>
+    <button data-w="w2">Wersja 2: jeden wiersz z dwiema grupami</button>
   </div>
   <div class="grupa"><b>Gdzie jest towar?</b>
     <button data-p="czesc">W 5 z 7 salonów</button>
@@ -51,11 +50,10 @@
 <script>
   var OPISY = {
     dzis: 'Dziś: jeden wiersz i 7 salonów w stałej kolejności, przemieszane zielone i szare kropki. Na komputerze lista zajmuje 2 linie, na telefonie 3.',
-    kolejnosc: 'A: nic nie dochodzi. Salony z towarem stoją na początku, alfabetycznie, a salony bez towaru mają szary napis. Klient od razu widzi, gdzie towar jest.',
-    zwiezle: 'B: ten sam wiersz, w środku dwie linie zwykłym tekstem: "Od ręki: ..." i "Pozostałe 2 salony za 1-2 dni". Termin "1-2 dni" sklep już dziś podaje w panelu salonów.',
-    jedna: 'C: wiersz skraca się do jednej linii "Darmowy odbiór w 7 salonach · od ręki w 5 z 7". Listę z podziałem na dwie grupy pokazuje panel po kliknięciu. Tak robią Calumet, Cameranu, WEX i Foto-Plus.'
+    w1: 'Wersja 1, według zadania w Asanie: dwie kategorie jako dwa osobne wiersze, każdy z ikoną salonu. "Natychmiastowy odbiór" i salony z towarem, pod spodem "Darmowy odbiór w salonach" i pozostałe salony. Gdy towar jest wszędzie albo nigdzie, zostaje jeden wiersz.',
+    w2: 'Wersja 2, według zadania w Asanie: te same dwie kategorie w jednym wierszu z jedną ikoną salonu. Nazwy kategorii stoją jak podpisy nad salonami, więc wiersz jest niższy niż w wersji 1.'
   };
-  var stan = { w: 'kolejnosc', p: 'czesc', k: '' };
+  var stan = { w: 'w1', p: 'czesc', k: '' };
   function skala() {
     var wolne = window.innerWidth - 390 - 24 - 32 - 4;
     document.documentElement.style.setProperty('--s', Math.max(0.35, Math.min(1, wolne / 1440)).toFixed(3));
