@@ -13667,12 +13667,12 @@ function rysuj() {
     html = (sa.length ? wiersz('Natychmiastowy odbiór', grupa(sa, 1)) : '') +
            (nie.length ? wiersz('Darmowy odbiór w salonach', grupa(nie, 0)) : '');
   } else if (wersja === 'w3') {
-    // wersja 3: "Natychmiastowy odbiór" zbudowany jak wiersz "Wysyłamy w 24h", z dużą zieloną kropką
+    // wersja 1 do testu: "Odbiór od ręki" z pinezką i pogrubionym napisem, niżej "Odbiór za 1-2 dni"
     var teraz = '<div class="row-info pgl-teraz" role="button" data-pgl-panel><div class="row-info__content">' +
-      '<div class="row-info__icon row-info__icon--availability"><span class="availability-icon availability-icon--100006 availability-icon--regular">' +
-      '<i class="fa-solid fa-circle"></i></span></div><div class="row-info__title"><div class="availability-text availability-text--bold">Natychmiastowy odbiór</div></div></div>' +
+      '<div class="row-info__icon"><i class="fa-solid fa-location-dot shops-availability-row__icon"></i></div>' +
+      '<div class="row-info__title"><div class="availability-text availability-text--bold">Odbiór od ręki</div></div></div>' +
       '<div class="row-info__more">' + grupa(sa, 1) + '</div></div>';
-    html = (sa.length ? teraz : '') + (nie.length ? wiersz('Darmowy odbiór w salonach', grupa(nie, 0)) : '');
+    html = (sa.length ? teraz : '') + (nie.length ? wiersz(sa.length ? 'Odbiór za 1-2 dni' : 'Darmowy odbiór w salonach', grupa(nie, 0)) : '');
   } else {
     // wersja 2: jeden wiersz z jedną ikoną, dwie kategorie jako podpisy nad salonami
     var srodek = (sa.length ? '<div class="pgl-kat">Natychmiastowy odbiór</div>' + grupa(sa, 1) : '') +
